@@ -41,6 +41,8 @@ Accessing PostgreSQL RDS instance locally: Make sure `Public Accessibility` is s
 
 Lambda VPC: When this project is deployed as-is, VPC connection is set to none. I needed to change this to `Custom VPC`, and add my default VPC and security group here. 
 
+`openapi_prefix="/prod"`: This value needs to match `StageName: prod` in `template.yml`. The sample project I pulled from had `Prod` with a capital P, which would not load the /docs and /redoc properly when deployed. 
+
 
 **Next Steps**  
 I'm currently using Lambda environment variables to set the database credentials (including password), so I need to figure out a more secure solution. Someone recommended to use KMS for this. 
