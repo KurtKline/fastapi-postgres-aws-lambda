@@ -32,3 +32,16 @@ psql \
 1) Dump (done from terminal line): `$ pg_dump -Fc mydb > db.dump`
 2) Connect to RDS as shown above
 3) Restore with: `pg_restore -v -h [endpoint of instance] -U [master username] -d [new database name] [database].dump`
+
+
+**Things that stumped me**  
+Accessing PostgreSQL RDS instance locally: Make sure `Public Accessibility` is set to `Yes`, otherwise you will get timeout. 
+
+`psycopg2-binary` instead of `psycopg2`: For some reason, AWS lambda doesn't play well with `psycopg2`, even though it works locally  
+
+Lambda VPC: When this project is deployed as-is, VPC connection is set to none. I needed to change this to `Custom VPC`, and add my default VPC and security group here. 
+
+
+**Next Steps**  
+I'm currently using Lambda environment variables to set the database credentials (including password), so I need to figure out a more secure solution. Someone recommended to use KMS for this. 
+
