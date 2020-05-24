@@ -28,6 +28,7 @@ I participate in a "fitness challenge" where data is collected. The format of th
 Since I already had all of the data locally, I wanted to dump it into a PostgreSQL RDS instance. I had some trouble connecting to my RDS instance from my local VM, so here are the steps to make it work: 
 
 1) In RDS instance settings, make sure `Public Accessibility` is set to `Yes`  
+2) Specify DB name, which will be used in pg_restore below
 2) `Whitelist IP`
    - Create new EC2 security group
    - Inbound Rules: `Type`: `All Traffic`, `Source`: `My IP`
@@ -48,8 +49,8 @@ Once the data is dumped into your RDS PostgreSQL instance, you can set `Public A
                
 ## Dump and Restore - Local PostgreSQL to RDS PostgreSQL
 1) Dump (done from terminal line): `$ pg_dump -Fc mydb > db.dump`
-2) Connect to RDS as shown above
-3) Restore with: `pg_restore -v -h [endpoint of RDS instance] -U [master username] -d [new database name] [database].dump`
+2) Restore with: `pg_restore -v -h [RDS endpoint] -U [master username ("postgres" by default)] -d [RDS database name] [dumpfile].dump`
+3) Verify load was successful by connecting with psql block shown above
 
 
 ## Things that stumped me
