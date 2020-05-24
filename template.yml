@@ -28,8 +28,8 @@ Resources:
             Environment: 
                 Variables:
                     DB_USER: postgres
-                    DB_PASS: kvEHgo1943bf
-                    DB_HOST: lpn.ctexyc9khyhm.eu-central-1.rds.amazonaws.com
+                    DB_PASS: <password goes here>
+                    DB_HOST: <rds endpoint goes here>
                     DB_PORT: 5432
                     DB_NAME: lpn
     FastapiExampleGateway:
