@@ -5,7 +5,7 @@ from mangum import Mangum
 
 app = FastAPI(
     title='FastAPI-AWS-Lambda-Test',
-    openapi_prefix="/Prod" # when deploying to prod
+    openapi_prefix="/prod" # when deploying to prod
 )
 
 app.include_router(players.router, tags=["players"])
