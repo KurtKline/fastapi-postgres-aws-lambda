@@ -47,3 +47,4 @@ Lambda VPC: When this project is deployed as-is, VPC connection is set to none. 
 **Next Steps**  
 I'm currently using Lambda environment variables to set the database credentials (including password), so I need to figure out a more secure solution. Someone recommended to use KMS for this. 
 
+AWSLambdaVPCAccessExecutionRole
