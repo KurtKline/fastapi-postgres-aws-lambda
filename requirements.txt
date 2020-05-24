@@ -3,3 +3,5 @@ mangum>=0.7.0
 pytest
 requests
 psycopg2
+sqlalchemy
+pydantic
