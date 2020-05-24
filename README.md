@@ -1,4 +1,18 @@
-# fastapi_aws
+# Deploying FastAPI on AWS, Using PostgreSQL RDS
+
+**Synopsis**  
+This project details the deployment of a Python FastAPI project, which uses a PostgreSQL database, to AWS. The AWS technologies used in production are:
+- RDS (relational database service)
+- Lambda
+- Cloud Formation
+- API Gateway
+- S3
+
+**Standing on the backs of giants**
+Major shoutout to [iwpnd](https://iwpnd.pw/). I followed his [tutorial](https://iwpnd.pw/articles/2020-01/deploy-fastapi-to-aws-lambda) to have a successful first basic deployment. He also provided sage advice when I got stuck in a few places. Essentially, I catered his project to my specific needs, and added the ability to connect to a PostgreSQL database. 
+
+**Motivation**  
+I participate in a "fitness challenge" where data is collected. The format of this collected data is not ideal, so I aim to clean this data, store it indefinitely on AWS in RDS, and make it available via FastAPI so that others can use the data for data analysis. 
 
 **Files**  
 - `crud.py`: specifies crud (create, read, update, delete) actions
