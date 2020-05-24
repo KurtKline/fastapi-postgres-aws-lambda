@@ -2,6 +2,6 @@ fastapi>=0.42.0
 mangum>=0.7.0
 pytest
 requests
-psycopg2
+psycopg2-binary
 sqlalchemy
 pydantic
