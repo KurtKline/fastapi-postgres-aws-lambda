@@ -8,7 +8,7 @@ This project details the deployment of a Python FastAPI project, which uses a Po
 - API Gateway
 - S3
 
-**Standing on the backs of giants**
+**Standing on the backs of giants**  
 Major shoutout to [iwpnd](https://iwpnd.pw/). I followed his [tutorial](https://iwpnd.pw/articles/2020-01/deploy-fastapi-to-aws-lambda) to have a successful first basic deployment. He also provided sage advice when I got stuck in a few places. Essentially, I catered his project to my specific needs, and added the ability to connect to a PostgreSQL database. 
 
 **Motivation**  
