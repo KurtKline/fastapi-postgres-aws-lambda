@@ -63,7 +63,11 @@ Once the data is dumped into your RDS PostgreSQL instance, you can set `Public A
 
 
 **Next Steps**  
-I'm currently using Lambda environment variables to set the database credentials (including password), so I need to figure out a more secure solution. Someone recommended to use KMS for this. 
+- I'm currently using Lambda environment variables to set the database credentials (including password), so I need to figure out a more secure solution. Someone recommended to use KMS for this. 
+
+- Add VPC settings for Lambda to template.yml file if possible, so that no changes need to be made after deployment. 
+
+- Create simple version which doesn't use routing, and data samples which can be used to illustrate full set-up. 
 
 
 **Random Notes**  
