@@ -62,6 +62,8 @@ Once the data is dumped into your RDS PostgreSQL instance, you can set `Public A
 
 - `openapi_prefix="/prod"`: This value needs to match `StageName: prod` in `template.yml`. The sample project I pulled from had `Prod` with a capital P, which would not load the /docs and /redoc properly when deployed. 
 
+- Need to add `AWSLambdaVPCAccessExecutionRole` policy to the `fastapilambdarole`, otherwise will get errors when using the `sam deploy` command. 
+
 
 ## Next Steps
 - I'm currently using Lambda environment variables to set the database credentials (including password), so I need to figure out a more secure solution. Someone recommended to use KMS for this. 
@@ -71,7 +73,3 @@ Once the data is dumped into your RDS PostgreSQL instance, you can set `Public A
 - Create simple version which doesn't use routing
 
 - Add data samples which can be used to illustrate full set-up. Probably using S3 load [S3 to RDS PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Procedural.Importing.html#USER_PostgreSQL.S3Import)
-
-
-## Random Notes
-I originally added `AWSLambdaVPCAccessExecutionRole` policy to the `fastapilambdarole`, but I tested without it and it doesn't appear necessary. 
