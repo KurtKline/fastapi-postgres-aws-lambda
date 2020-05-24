@@ -27,3 +27,8 @@ psql \
    --dbname=<database name> 
 ```
                     
+               
+**Dump and Restore**
+1) Dump (done from terminal line): `$ pg_dump -Fc mydb > db.dump`
+2) Connect to RDS as shown above
+3) Restore with: `pg_restore -v -h [endpoint of instance] -U [master username] -d [new database name] [database].dump`
