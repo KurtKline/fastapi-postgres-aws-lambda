@@ -15,6 +15,27 @@ Major shoutout to [iwpnd](https://iwpnd.pw/). I followed his [tutorial](https://
 I participate in a "fitness challenge" where data is collected. The format of this collected data is not ideal, so I aim to clean this data, store it indefinitely on AWS in RDS, and make it available via FastAPI so that others can use the data for data analysis. 
 
 ## Files
+
+```
+.
+├── app
+|   ├── __init__.py
+│   ├── crud.py
+│   ├── database.py
+│   ├── main.py
+│   ├── models.py
+│   ├── routers
+│   │   ├── __init__.py
+│   │   ├── players.py
+│   │   ├── seasons.py
+│   │   └── teams.py
+│   └── schemas.py
+├── LICENSE
+├── README.md
+├── requirements.txt
+└── template.yml
+```
+
 - `crud.py`: specifies crud (create, read, update, delete) actions
 - `database.py`: sets up connection with PostgreSQL
 - `main.py`: brings all routes together
