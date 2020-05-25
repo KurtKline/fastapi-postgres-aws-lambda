@@ -73,3 +73,7 @@ Once the data is dumped into your RDS PostgreSQL instance, you can set `Public A
 - Create simple version which doesn't use routing
 
 - Add data samples which can be used to illustrate full set-up. Probably using S3 load [S3 to RDS PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Procedural.Importing.html#USER_PostgreSQL.S3Import)
+
+## Random notes
+- `setup.py`: not required for deployment to AWS; Simply helps with requirements.txt installation
+- `Dockerfile`: not requried for deployment to AWS; Just presents another option for running locally
