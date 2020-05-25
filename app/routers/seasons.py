@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from example_app import crud, models, schemas
-from example_app.database import SessionLocal, engine
+from app import crud, models, schemas
+from app.database import SessionLocal, engine
 from typing import List
 
 router = APIRouter()
@@ -17,7 +17,7 @@ def get_db():
         db.close()
 
 
-@router.get("/points/season/{season}", response_model=List[schemas.PointEvent])
+@router.get("/points/season/{season}", response_model=List[schemas.PointEvent], summary='point logs for a season')
 def read_season(season: str, db: Session = Depends(get_db)):
     db_season = crud.get_points_by_season(db, season=season)
     if db_season is None:
