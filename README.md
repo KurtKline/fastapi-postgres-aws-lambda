@@ -66,15 +66,15 @@ Once the data is dumped into your RDS PostgreSQL instance, you can set `Public A
 
 
 ## Next Steps
-- [] I'm currently using Lambda environment variables to set the database credentials (including password), so I need to figure out a more secure solution. Someone recommended to use KMS for this. 
+- [ ] I'm currently using Lambda environment variables to set the database credentials (including password), so I need to figure out a more secure solution. Someone recommended to use KMS for this. 
 
 - [x] Add VPC settings for Lambda to template.yml file if possible, so that no changes need to be made after deployment. 
 
-- [] Create simple version which doesn't use routing
+- [ ] Create simple version which doesn't use routing
 
-- [] Add data samples which can be used to illustrate full set-up. Probably using S3 load [S3 to RDS PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Procedural.Importing.html#USER_PostgreSQL.S3Import)
+- [ ] Add data samples which can be used to illustrate full set-up. Probably using S3 load [S3 to RDS PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Procedural.Importing.html#USER_PostgreSQL.S3Import)
 
-- [] Add black formatting and pre-commit
+- [ ] Add black formatting and pre-commit
 
 ## Random notes
 - `setup.py`: not required for deployment to AWS; Simply helps with requirements.txt installation
