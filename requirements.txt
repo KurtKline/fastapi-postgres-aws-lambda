@@ -1,4 +1,4 @@
-fastapi[all]
+fastapi
 mangum
 psycopg2-binary
 sqlalchemy
