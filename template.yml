@@ -38,7 +38,7 @@ Resources:
                     DB_HOST: {replace}
                     DB_PORT: {replace}
                     DB_NAME: {replace}
-    FastapiExampleGateway:
+    FastApiGateway:
         Type: AWS::Serverless::Api
         Properties:
             StageName: prod
