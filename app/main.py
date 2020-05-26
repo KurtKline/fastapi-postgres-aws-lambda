@@ -4,7 +4,7 @@ from .routers import players, teams, seasons
 from mangum import Mangum
 
 app = FastAPI(
-    title='FastAPI-PostgreSQL-AWS-Lambda',
+    title="FastAPI-PostgreSQL-AWS-Lambda",
     # openapi_prefix="/prod"
 )
 

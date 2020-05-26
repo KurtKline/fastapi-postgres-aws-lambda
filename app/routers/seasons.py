@@ -17,7 +17,11 @@ def get_db():
         db.close()
 
 
-@router.get("/points/season/{season}", response_model=List[schemas.PointEvent], summary='point logs for a season')
+@router.get(
+    "/points/season/{season}",
+    response_model=List[schemas.PointEvent],
+    summary="point logs for a season",
+)
 def read_season(season: str, db: Session = Depends(get_db)):
     db_season = crud.get_points_by_season(db, season=season)
     if db_season is None:
