@@ -47,7 +47,7 @@ I participate in a "fitness challenge" where players log daily points. The forma
 - `requirements.txt`: requirements to install when project is built using sam
 - `template.yml`: essentially the recipe for deploying the project to AWS
 
-## Setup
+## Setup (linux)
 ### Install and configure AWS CLI and SAM
 In order to proceed with set-up and deployment, AWS CLI and SAM need to be installed and configured on your machine. 
 - [Install CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
@@ -69,7 +69,7 @@ When we deploy our code with AWS SAM, a zip folder of our code will be uploaded 
 (2) With the [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/s3api/create-bucket.html)
 ```
 aws s3api create-bucket \
---bucket fastapi-postgres-bucket \
+--bucket {your bucket name here} \
 --region eu-central-1 \
 --create-bucket-configuration LocationConstraint=eu-central-1
 ```
@@ -104,12 +104,12 @@ uvicorn app.main:app --reload
 
 Once you click the link, add /docs or /redoc to the URL `http://127.0.0.1:8000/docs`. You will then see the Swagger UI.
 
-### Setting up RDS Instance
-Since I already had all of the data locally, I wanted to dump it into a PostgreSQL RDS instance. I had some trouble connecting to my RDS instance from my local VM, so here are the steps to make it work:
+### Setting up RDS PostgreSQL Instance
+In order to deploy to AWS, our code AND our database needs to live on AWS. Here are some basic guidelines to setting up the RDS PostgreSQL instance. 
 
 1) In RDS instance settings, make sure `Public Accessibility` is set to `Yes`
-2) Specify DB name, which will be used in pg_restore below
-2) `Whitelist IP`
+2) Specify `initial database name`, which will be used in pg_restore below
+3) Whitelist IP
    - Create new EC2 security group
    - Inbound Rules: `Type`: `All Traffic`, `Source`: `My IP`
    - Add this security group to RDS instance
@@ -127,20 +127,44 @@ psql \
 Once the data is dumped into your RDS PostgreSQL instance, you can set `Public Accessibility` back to `No` if you'd like. This just prevents external sources, like your local PC, from accessing your RDS instance.
 
 
-### Dump and Restore - Local PostgreSQL to RDS PostgreSQL
+### Loading data into RDS PostgreSQL
+
+Here are two options for loading the data into RDS PostgreSQL
+
+#### Dump and Restore: if data already exists in local PostgreSQL
 1) Dump (done from terminal line): `$ pg_dump -Fc mydb > db.dump`
 2) Restore with: `pg_restore -v -h [RDS endpoint] -U [master username ("postgres" by default)] -d [RDS database name] [dumpfile].dump`
 3) Verify load was successful by connecting with psql block shown above
 
-### Insert into PostgreSQL RDS from .csv file
+#### From .csv file
+First connect to RDS through psql as shown above. Depending on your database name, `fit=>` shown below may be different for you. 
 ```
-lpn_fit=> create table fit (id serial, player varchar(50), team varchar(50), season varchar(50), data_date date, points float);
-lpn_fit=> \copy fit(player, team, season, data_date, points) from 'clean_fit.csv' with DELIMITER ',' CSV HEADER;
+fit=> create table fit (id serial, player varchar(50), team varchar(50), season varchar(50), data_date date, points float);
+fit=> \copy fit(player, team, season, data_date, points) from 'clean_fit.csv' with DELIMITER ',' CSV HEADER;
 COPY 105
 ```
 
 More options for loading data into PostgreSQL RDS  
 https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Procedural.Importing.html
+
+### Deploying project with AWS SAM
+The `template.yml` file is used for deployment with AWS SAM. 
+
+(1) Replace the values in `template.yml` specified as `{replace}`.  
+(2) Uncomment `# openapi_prefix="/prod"` in `app/main.py`. This allows proper access of API when deployed.  
+(3) Run following steps for SAM in linux terminal  
+```
+sam validate
+```
+```
+sam build --debug
+```
+```
+sam package --s3-bucket {your bucket name here} --output-template-file out.yml --region eu-central-1
+```
+```
+sam deploy --template-file out.yml --stack-name example-stack-name --region eu-central-1 --no-fail-on-empty-changeset --capabilities CAPABILITY_IAM
+```
 
 ## Things that stumped me
 - Accessing PostgreSQL RDS instance locally: Make sure `Public Accessibility` is set to `Yes`, otherwise you will get a timeout error.
@@ -157,14 +181,8 @@ https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Procedural.Imp
 ## Next Steps
 - [ ] I'm currently using Lambda environment variables to set the database credentials (including password), so I need to figure out a more secure solution. Someone recommended to use KMS for this.
 
-- [x] Add VPC settings for Lambda to template.yml file if possible, so that no changes need to be made after deployment.
+- [x] Add VPC settings for Lambda to template.yml file if possible, so that no changes need to be made after deployment
 
-- [ ] Create simple version which doesn't use routing
+- [x] Add data samples which can be used to illustrate full set-up
 
-- [ ] Add data samples which can be used to illustrate full set-up. Probably using S3 load [S3 to RDS PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Procedural.Importing.html#USER_PostgreSQL.S3Import)
-
-- [ ] Add black formatting and pre-commit
-
-## Random notes
-- `setup.py`: not required for deployment to AWS; Simply helps with requirements.txt installation
-- `Dockerfile`: not requried for deployment to AWS; Just presents another option for running locally
+- [x] Add black formatting and pre-commit
