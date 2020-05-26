@@ -166,7 +166,7 @@ sam package --s3-bucket {your bucket name here} --output-template-file out.yml -
 sam deploy --template-file out.yml --stack-name example-stack-name --region eu-central-1 --no-fail-on-empty-changeset --capabilities CAPABILITY_IAM
 ```
 
-## Things that stumped me
+## Bumps along the way
 - Accessing PostgreSQL RDS instance locally: Make sure `Public Accessibility` is set to `Yes`, otherwise you will get a timeout error.
 
 - `psycopg2-binary` instead of `psycopg2`: For some reason, AWS lambda doesn't play well with `psycopg2`, even though it works locally
