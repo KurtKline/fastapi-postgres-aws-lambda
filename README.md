@@ -84,11 +84,25 @@ cd fastapi-postgres-aws-lambda
 pip install -r requirements.txt
 pip install uvicorn
 ```
+
+In order to test locally without errors, PostgreSQL needs to be installed on your local machine, and the sample data needs to be loaded into a database table. 
+[Installing PostgreSQL on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart)
+
+From the linux terminal: 
+```
+psql
+postgres=# CREATE DATABASE fitness;
+postgres=# CREATE TABLE fit (id serial, player varchar(50), team varchar(50), season varchar(50), data_date date, points float);
+postgres=# \copy fit(player, team, season, data_date, points) from 'clean_fit.csv' with DELIMITER ',' CSV HEADER;
+```
+
 Start FastAPI
 ```
 uvicorn app.main:app --reload
 # click the link to open the browser at http://127.0.0.1:8000
 ```
+
+Once you click the link, add /docs or /redoc to the URL `http://127.0.0.1:8000/docs`. You will then see the Swagger UI.
 
 ### Setting up RDS Instance
 Since I already had all of the data locally, I wanted to dump it into a PostgreSQL RDS instance. I had some trouble connecting to my RDS instance from my local VM, so here are the steps to make it work:
