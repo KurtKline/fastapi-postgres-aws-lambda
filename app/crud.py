@@ -2,6 +2,8 @@ from sqlalchemy.orm import Session
 
 from . import models, schemas
 
+def get_refugee(db: Session, refugee: int = 0):
+    return db.get(models.Refugee, refugee)
 
 def get_point_logs(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.PointEvent).offset(skip).limit(limit).all()
