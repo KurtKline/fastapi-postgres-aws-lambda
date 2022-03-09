@@ -8,3 +8,5 @@ app = FastAPI()
 @app.get("/", tags=["Root"])
 def read_root()-> dict:
     return {"message": "welcome to FastAPI!"}
+
+app.include_router(refugees.router, tags=["Refugees"])
