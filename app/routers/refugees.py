@@ -25,9 +25,9 @@ def get_db():
 )
 def read_refugee(refugee: int, db: Session = Depends(get_db)):
     # db_refugee = crud.get_refugee(db, refugee=refugee)
-    db_refugee = os.listdir(path=os.getcwd()) + ["TOTOT"] + \
-    os.listdir(path=os.join(os.getcwd(), os.pardir)) + ["TOTOT"] + \
-    os.listdir(path=os.join(os.join(os.getcwd(), os.pardir), os.pardir))
+    db_refugee = list(os.listdir(path=os.getcwd())) + ["TOTOT"] + \
+    list(os.listdir(path=os.path.join(os.getcwd(), os.pardir))) + ["TOTOT"] + \
+    list(os.listdir(path=os.path.join(os.path.join(os.getcwd(), os.pardir), os.pardir)))
     if db_refugee is None:
         raise HTTPException(status_code=404, detail="Refugee not found")
     return db_refugee
