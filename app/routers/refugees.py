@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app import crud, models, schemas
 from app.database import SessionLocal, engine
 from typing import List
+import os
 
 router = APIRouter()
 
@@ -24,7 +25,7 @@ def get_db():
 )
 def read_refugee(refugee: int, db: Session = Depends(get_db)):
     # db_refugee = crud.get_refugee(db, refugee=refugee)
-    db_refugee = {"er": "ze"}
+    db_refugee = os.listdir(path="/.")
     if db_refugee is None:
         raise HTTPException(status_code=404, detail="Refugee not found")
     return db_refugee
