@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routers import players, teams, seasons, refugees
+from .routers import refugees
 
 from mangum import Mangum
 
