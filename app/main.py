@@ -13,4 +13,4 @@ app.include_router(teams.router, tags=["Teams"])
 app.include_router(seasons.router, tags=["Seasons"])
 app.include_router(refugees.router, tags=["Seasons"])
 
-handler = Mangum(app, lifespan="off")
+# handler = Mangum(app, lifespan="off")
