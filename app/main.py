@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from .routers import players, teams, seasons, refugees
 
-# from mangum import Mangum
+from mangum import Mangum
 
 app = FastAPI()
 
