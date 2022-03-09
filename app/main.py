@@ -9,5 +9,3 @@ app = FastAPI(
 )
 
 app.include_router(refugees.router, tags=["Seasons"])
-
-handler = Mangum(app, lifespan="off")
