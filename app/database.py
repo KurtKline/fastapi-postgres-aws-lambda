@@ -10,7 +10,8 @@ import os
 # database = os.environ["DB_NAME"]
 
 # SQLALCHEMY_DATABASE_URL = f"mysql://{user}:{password}@{host}:{port}/{database}"
-SQLALCHEMY_DATABASE_URL = "mysql+mysqldb://dev:dev@127.0.0.1:3306/fitness"
+# SQLALCHEMY_DATABASE_URL = "mysql+mysqldb://dev:dev@127.0.0.1:3306/fitness"
+SQLALCHEMY_DATABASE_URL = "sqlite:///dev-sqlite-database.db"
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
