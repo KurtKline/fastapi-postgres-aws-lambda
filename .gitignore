@@ -1,3 +1,5 @@
 **/__pycache__/**
 
 dev-sqlite-database.db
+
+**/.vscode/**
